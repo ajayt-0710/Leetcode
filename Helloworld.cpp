@@ -32,14 +32,40 @@ int countConsistentStrings(string allowed, vector<string>& words) {
     return consistent_count;
 }
 
-
+int reverseDegree(string s) {
+    int last=int('z');
+    vector<int> product;
+    int revese_index=0;
+    int sum=0;
+    char current_char;
+    for(int i=1 ; i<s.length() ; i++){
+        current_char = s[i];
+        revese_index = last - int(s[i]) + 1;
+        product.push_back(revese_index * i);
+    }
+    for(int i=0 ; i<product.size() ; i++){
+        sum+= product[i];
+    }
+    cout << sum;
+    return sum;
+}
+int scoreOfString(string s) {
+    int sub;
+    vector<int> subtracted_array;
+    int sum;
+    for(int i=0 ; i<s.size()-1;i++){
+        sub=abs(int(s[i])-int(s[i+1]));
+        subtracted_array.push_back(sub);
+    }
+    for(int i=0;i<subtracted_array.size(); i++){
+        sum+= subtracted_array[i];
+    }
+    return sum;
+}
 
 
 int main() {
-    vector<string> words={"ad","bd","aaab","baa","badab"};
-    string allowed="a";
-
-    countConsistentStrings(allowed, words);
+    scoreOfString("hello");
 
 }
 
