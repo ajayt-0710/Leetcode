@@ -121,14 +121,32 @@ string mapWordWeights(vector<string>& words, vector<int>& weights) {
     }
     return answer;
 }
+vector<int> findMissingElements(vector<int>& nums) {
+    int max= *max_element(nums.begin(),nums.end());
+    int min= *min_element(nums.begin(),nums.end());
+    vector<int> not_missing;
+    vector<int> missing;
 
+    for(int i=min;i<=max;i++){
+        int c;
+        for(int j=0;j<nums.size();j++){
+            if(nums[j]==i){
+
+                not_missing.push_back(nums[j]);
+                c++;
+            }
+        }
+        if(c==0){
+            missing.push_back(i);
+        }
+        c=0;
+    }
+    return missing;
+}
 
 int main() {
-    vector<string> words;
-    vector<int> indices;
-    words={"abcd","def","xyz"};
-    indices={5,3,12,14,1,2,3,2,10,6,6,9,7,8,7,10,8,9,6,9,9,8,3,7,7,2};
-    mapWordWeights(words,indices);
+    vector<int> nums={5,1};
+    findMissingElements(nums);
     return 0;
 }
 
