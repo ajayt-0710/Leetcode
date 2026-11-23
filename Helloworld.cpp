@@ -62,10 +62,73 @@ int scoreOfString(string s) {
     }
     return sum;
 }
+string reversePrefix(string word, char ch) {
+    string rev;
+    int find;
+    find=word.find(ch);
+    if (word[find] == ch){
+        for(int i=find ; i>0 ; i--){
+            rev.push_back(word[i]);
+        }
+        for(int i=find+1 ; i<word.length() ; i++){
+            rev.push_back(word[i]);
+
+        }
+    }
+
+    if(rev.empty()){
+        return word;
+        cout<<word<<endl;
+    }
+    else{
+        return rev;
+        cout<<rev<<endl;
+    }
+}
+string restoreString(string s, vector<int>& indices) {
+    string answer(s.length(),' ');
+    int a=0;
+    for(int i=0 ; i<indices.size() ; i++){
+        a=indices[i];
+        answer.insert(a,1,s[i]);
+    }
+    return answer;
+}
+string mapWordWeights(vector<string>& words, vector<int>& weights) {
+    vector<int> mod_ans;
+    int map=0;
+
+    int ascii=0;
+    string answer;
+    for(int i=0;i<words.size();i++){
+        vector<int> map_ans;
+        for(int j=0;j<words[i].size();j++){
+            map=int(words[i][j]);
+            map=map-97;
+            map_ans.push_back(weights[map]);
+
+        }
+        int mod=0;
+        for(int k=0;k<map_ans.size();k++){
+            mod+=map_ans[k];
+        }
+        mod=mod%26;
+        mod_ans.push_back(mod);
+    }
+    for(int i=0;i<mod_ans.size();i++){
+        ascii=122-mod_ans[i];
+        answer.push_back(char(ascii));
+    }
+    return answer;
+}
 
 
 int main() {
-    scoreOfString("hello");
-
+    vector<string> words;
+    vector<int> indices;
+    words={"abcd","def","xyz"};
+    indices={5,3,12,14,1,2,3,2,10,6,6,9,7,8,7,10,8,9,6,9,9,8,3,7,7,2};
+    mapWordWeights(words,indices);
+    return 0;
 }
 
