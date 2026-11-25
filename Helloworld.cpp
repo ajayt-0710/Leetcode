@@ -1,5 +1,8 @@
 #include<iostream>
 #include <set>
+#include <vector>
+#include <string>
+#include <sstream>
 using namespace std;
 
 void print_set(set<char> s) {
@@ -49,6 +52,7 @@ int reverseDegree(string s) {
     cout << sum;
     return sum;
 }
+
 int scoreOfString(string s) {
     int sub;
     vector<int> subtracted_array;
@@ -62,6 +66,7 @@ int scoreOfString(string s) {
     }
     return sum;
 }
+
 string reversePrefix(string word, char ch) {
     string rev;
     int find;
@@ -85,6 +90,7 @@ string reversePrefix(string word, char ch) {
         cout<<rev<<endl;
     }
 }
+
 string restoreString(string s, vector<int>& indices) {
     string answer(s.length(),' ');
     int a=0;
@@ -94,6 +100,7 @@ string restoreString(string s, vector<int>& indices) {
     }
     return answer;
 }
+
 string mapWordWeights(vector<string>& words, vector<int>& weights) {
     vector<int> mod_ans;
     int map=0;
@@ -121,6 +128,7 @@ string mapWordWeights(vector<string>& words, vector<int>& weights) {
     }
     return answer;
 }
+
 vector<int> findMissingElements(vector<int>& nums) {
     int max= *max_element(nums.begin(),nums.end());
     int min= *min_element(nums.begin(),nums.end());
@@ -143,6 +151,7 @@ vector<int> findMissingElements(vector<int>& nums) {
     }
     return missing;
 }
+
 int countPairs(vector<int>& nums, int target) {
     int c=0;
     for(int i=0;i<nums.size();i++){
@@ -217,8 +226,50 @@ string reverseByType(string s) {
     }
     return answer;
 }
+
+vector<int> numberGame(vector<int>& nums) {
+    vector<int> answer;
+    sort(nums.begin(),nums.end());
+    for(int i=0;i < nums.size();i++){
+        int s=nums.size()-1;
+        if(i!=s){
+            int a=nums[i+1];
+            answer.push_back(a);
+            a=nums[i];
+            answer.push_back(a);
+            i++;
+        }
+    }
+    return answer;
+}
+
+string sortSentence(string s) {
+    stringstream ss(s);
+    string word;
+    vector<string> words;
+    while(ss>>word){
+        words.push_back(word);
+    }
+    vector<string> answer(words.size());
+    auto it=words.size();
+    for(int i=0;i<words.size();i++){
+        int word_index= words[i].size();
+
+        for(int j=word_index-1;j<word_index;j++){
+            char a=words[i][j];
+            int b=a - '0' -1;
+            answer[b] = words[i];
+        }
+    }
+    string final_answer(s.length(), ' ');
+    for(int i=0;i<words.size();i++){
+        final_answer.replace(i, words[i].length(), words[i]);    }
+
+    return final_answer;
+}
 int main() {
-    string s=")ebc#da@f(";
-    reverseByType(s);
+    string s="is2 sentence4 This1 a3";
+    sortSentence(s);
+
 }
 
