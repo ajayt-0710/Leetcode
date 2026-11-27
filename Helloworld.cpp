@@ -226,6 +226,7 @@ string reverseByType(string s) {
     }
     return answer;
 }
+<<<<<<< HEAD
 
 vector<int> numberGame(vector<int>& nums) {
     vector<int> answer;
@@ -239,10 +240,44 @@ vector<int> numberGame(vector<int>& nums) {
             answer.push_back(a);
             i++;
         }
+=======
+vector<int> leftRightDifference(vector<int>& nums) {
+    vector<int> left_sum;
+    vector<int> right_sum;
+    left_sum.push_back(0);
+    right_sum.push_back(0);
+    left_sum.push_back(nums[0]);
+    int a=nums.size()-1;
+    right_sum.push_back(nums[a]);
+    vector<int> answer;
+    if (nums.size()==2) {
+        answer.push_back(left_sum[1]);
+        answer.push_back(right_sum[1]);
+        return answer;
+    }
+    auto it1 = nums.begin();
+    auto it2=nums.begin()+1;
+    int n=*it1 + *it2;
+    left_sum.push_back(n);
+    for(int i=2;i<nums.size()-1;i++){
+        n=n+nums[i];
+        left_sum.push_back(n);
+    }
+    int p=nums[a];
+    for(int i=nums.size()-2;i>0;i--){
+        p= p + nums[i];
+        right_sum.push_back(p);
+    }
+    reverse(right_sum.begin(),right_sum.end());
+    for(int i=0;i<left_sum.size();i++){
+        int o=abs(left_sum[i] - right_sum[i]);
+        answer.push_back(o);
+>>>>>>> 5b659de (27.nov)
     }
     return answer;
 }
 
+<<<<<<< HEAD
 string sortSentence(string s) {
     stringstream ss(s);
     string word;
@@ -270,6 +305,83 @@ string sortSentence(string s) {
 int main() {
     string s="is2 sentence4 This1 a3";
     sortSentence(s);
+=======
+int mostWordsFound(vector<string>& sentences) {
+        int j=0;
+        vector<int>count;
+        for(int i=0;i<sentences.size();i++) {
+            int c=0;
+            for (int j=0;j<sentences[i].size();j++) {
+                char a=sentences[i][j];
+                if (sentences[i][j] == ' ') {
+                    c++;
+                }
+            }
+            c++;
+            count.push_back(c);
+        }
+    int max= *max_element(count.begin(),count.end());
+    return max;
+}
+
+string reversePrefix(string s, int k) {
+    string answer(s.length(), ' ');
+    auto it1=s.begin();
+    auto it2=it1+(k-1);
+    if (k==1) {
+        return s;
+    }
+    else {
+        for(int i=0;i<s.length();i=i+2) {
+            reverse(it1,it2);
+            it2 = it2+ k;
+            it1 = it1 +k;
+        }
+        return s;
+    }
+
+}
+
+
+
+vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) {
+    int c;
+    vector<int> answer;
+    vector<int> check;
+
+    c=0;
+    for(int i=0;i<nums1.size();i++){
+        for(int j=0;j<nums2.size();j++){
+            if(nums1[i]==nums2[j]){
+                c++;
+            }
+        }
+    }
+
+    answer.push_back(c);
+    c=0;
+    for(int i=0;i<nums2.size();i++){
+        for(int j=0;j<nums1.size();j++) {
+            int a=nums1[j];
+            int b=nums2[i];{
+                if(nums1[j]==nums2[i]){
+                    c++;
+                }
+            }
+        }
+    }
+    answer.push_back(c);
+
+    return answer;
+}
+
+int main() {
+    vector<int> nums1={4,3,2,3,1};
+    vector<int> nums2={2,2,5,2,3,6};
+    findIntersectionValues(nums1,nums2);
+
+
+>>>>>>> 5b659de (27.nov)
 
 }
 
